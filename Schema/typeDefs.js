@@ -17,17 +17,7 @@ const typeDefs = gql `
     instruction: [String]!
   }
 
-  type Post {
-    id: ID
-    title: String
-    description: String
-  }
-
   type Query {
-    hello: String
-    getAllPosts: [Post]
-    getPost(id: ID): Post
-
     getAllRecipes: [Recipe]
     getRecipe(id: ID): Recipe
   }
@@ -47,16 +37,7 @@ const typeDefs = gql `
     instruction: [String]!
   }
 
-  input PostInput {
-    title: String
-    description: String
-  }
-
   type Mutation {
-    createPost(post: PostInput): Post
-    deletePost(id: ID): String
-    updatePost(id: ID, post: PostInput): Post
-
     createRecipe(recipe: RecipeInput): Recipe
     deleteRecipe(id: ID): Boolean
     updateRecipe(id: ID, recipe: RecipeInput): Recipe
