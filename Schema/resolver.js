@@ -1,4 +1,5 @@
-const Post = require("./models/Post.model");
+const Post = require("../models/Post.model");
+
 const resolvers = {
     Query: {
         hello: () => {
