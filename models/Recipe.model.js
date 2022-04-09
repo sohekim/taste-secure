@@ -16,11 +16,10 @@ const recipeSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    // nutritions: {
-    //     type: [{ type: String, val: Number }],
-    //     required: true,
-    // },
-    // calories,
+    nutritions: {
+        type: [{ key: String, value: String }],
+        required: true,
+    },
     main_ingredients: {
         type: [String],
         required: true,
@@ -29,10 +28,6 @@ const recipeSchema = new mongoose.Schema({
         type: [String],
         required: true,
     },
-    // date: {
-    //     type: Date,
-    //     default: Date.now(),
-    // },
 });
 
 module.exports = Recipe = mongoose.model("recipe", recipeSchema);

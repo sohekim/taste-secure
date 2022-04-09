@@ -29,6 +29,7 @@ const resolvers = {
                 description,
                 price_per_serving,
                 minutes,
+                nutritions,
                 main_ingredients,
                 instruction,
             } = args.recipe;
@@ -38,6 +39,7 @@ const resolvers = {
                 description: description,
                 price_per_serving: price_per_serving,
                 minutes: minutes,
+                nutritions: nutritions,
                 main_ingredients: main_ingredients,
                 instruction: instruction,
             };
