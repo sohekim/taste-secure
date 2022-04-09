@@ -4,9 +4,14 @@ const typeDefs = gql `
 
     type Recipe {
         id: ID
-        name: String
-        required: true
+        name: String!
+        description: String!
+        price_per_serving: Int!
+        minutes: Int!
+        main_ingredients: [String]!
+        instruction: [String]!
     }
+
     type Post {
         id: ID
         title: String
@@ -17,6 +22,18 @@ const typeDefs = gql `
         hello: String
         getAllPosts: [Post]
         getPost(id: ID): Post
+
+        getAllRecipes: [Recipe]
+        getRecipe(id: ID): Recipe
+    }
+
+    input RecipeInput {
+        name: String!
+        description: String!
+        price_per_serving: Int!
+        minutes: Int!
+        main_ingredients: [String]!
+        instruction: [String]!
     }
 
     input PostInput {
@@ -28,6 +45,9 @@ const typeDefs = gql `
         createPost(post: PostInput): Post
         deletePost(id: ID): String 
         updatePost(id:ID, post: PostInput): Post
+
+        createRecipe(recipe: RecipeInput): Recipe
+        deleteRecipe(id: ID): Boolean
     }
 
 `;
