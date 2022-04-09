@@ -59,6 +59,7 @@ const typeDefs = gql `
 
     createRecipe(recipe: RecipeInput): Recipe
     deleteRecipe(id: ID): Boolean
+    updateRecipe(id: ID, recipe: RecipeInput): Recipe
   }
 `;
 
