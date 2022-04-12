@@ -15,6 +15,7 @@ const typeDefs = gql `
     nutritions: [Pair]
     main_ingredients: [String]!
     instruction: [String]!
+    image_url: String!
   }
 
   type Query {
@@ -35,6 +36,7 @@ const typeDefs = gql `
     nutritions: [PairInput]
     main_ingredients: [String]!
     instruction: [String]!
+    image_url: String!
   }
 
   type Mutation {

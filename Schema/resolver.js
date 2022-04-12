@@ -20,6 +20,7 @@ const resolvers = {
                 nutritions,
                 main_ingredients,
                 instruction,
+                image_url,
             } = args.recipe;
 
             const newRecipe = {
@@ -30,8 +31,10 @@ const resolvers = {
                 nutritions: nutritions,
                 main_ingredients: main_ingredients,
                 instruction: instruction,
+                image_url: image_url
             };
             const recipe = await new Recipe(newRecipe).save();
+            console.log(recipe.image_url);
             return recipe;
         },
 
@@ -55,6 +58,7 @@ const resolvers = {
                 nutritions,
                 main_ingredients,
                 instruction,
+                image_url
             } = recipe;
 
             const newRecipe = {
@@ -65,6 +69,7 @@ const resolvers = {
                 nutritions: nutritions,
                 main_ingredients: main_ingredients,
                 instruction: instruction,
+                image_url: image_url
             };
 
             const updatedRecipe = await Recipe.findByIdAndUpdate(id, newRecipe, {
