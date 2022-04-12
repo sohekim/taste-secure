@@ -1,0 +1,83 @@
+const Recipe = require("../models/Recipe.model");
+
+const resolvers = {
+    Query: {
+        getAllRecipes: async() => {
+            return await Recipe.find();
+        },
+        getRecipe: async(_, { id }) => {
+            return await Recipe.findById(id);
+        },
+    },
+
+    Mutation: {
+        createRecipe: async(_, args) => {
+            const {
+                name,
+                description,
+                price_per_serving,
+                minutes,
+                nutritions,
+                main_ingredients,
+                instruction,
+                image_url,
+            } = args.recipe;
+
+            const newRecipe = {
+                name: name,
+                description: description,
+                price_per_serving: price_per_serving,
+                minutes: minutes,
+                nutritions: nutritions,
+                main_ingredients: main_ingredients,
+                instruction: instruction,
+                image_url: image_url
+            };
+            const recipe = await new Recipe(newRecipe).save();
+            console.log(recipe.image_url);
+            return recipe;
+        },
+
+        deleteRecipe: async(_, { id }) => {
+            try {
+                await Recipe.findByIdAndDelete(id);
+                return true;
+            } catch (err) {
+                console.log(err);
+                return false;
+            }
+        },
+
+        updateRecipe: async(_, { id, recipe }) => {
+            // todo: a way to do it dynamically (only pass the field to change)
+            const {
+                name,
+                description,
+                price_per_serving,
+                minutes,
+                nutritions,
+                main_ingredients,
+                instruction,
+                image_url
+            } = recipe;
+
+            const newRecipe = {
+                name: name,
+                description: description,
+                price_per_serving: price_per_serving,
+                minutes: minutes,
+                nutritions: nutritions,
+                main_ingredients: main_ingredients,
+                instruction: instruction,
+                image_url: image_url
+            };
+
+            const updatedRecipe = await Recipe.findByIdAndUpdate(id, newRecipe, {
+                new: true,
+            });
+            return updatedRecipe;
+        },
+    },
+};
+
+module.exports = resolvers;
