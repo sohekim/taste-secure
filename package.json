@@ -4,13 +4,14 @@
     "description": "",
     "main": "server.js",
     "scripts": {
-        "dev": "nodemon server.js",
-        "start": "node server.js"
+        "dev": "cross-env NODE_ENV=dev nodemon server.js",
+        "start": "npx cross-env NODE_ENV=prod node server.js"
     },
     "author": "",
     "license": "ISC",
     "dependencies": {
         "apollo-server-express": "^3.6.7",
+        "cross-env": "^7.0.3",
         "express": "^4.17.3",
         "graphql": "^16.3.0",
         "mongoose": "^6.2.10"
