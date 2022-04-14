@@ -14,6 +14,7 @@ const typeDefs = gql `
     minutes: Int!
     nutritions: [Pair]
     main_ingredients: [String]!
+    ingredients: [String]
     instruction: [String]!
     image_url: String
   }
@@ -35,6 +36,7 @@ const typeDefs = gql `
     minutes: Int!
     nutritions: [PairInput]
     main_ingredients: [String]!
+    ingredients: [String]
     instruction: [String]!
     image_url: String
   }
