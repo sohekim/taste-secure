@@ -19,6 +19,7 @@ const resolvers = {
                 minutes,
                 nutritions,
                 main_ingredients,
+                ingredients,
                 instruction,
                 image_url,
             } = args.recipe;
@@ -30,11 +31,11 @@ const resolvers = {
                 minutes: minutes,
                 nutritions: nutritions,
                 main_ingredients: main_ingredients,
+                ingredients: ingredients,
                 instruction: instruction,
                 image_url: image_url
             };
             const recipe = await new Recipe(newRecipe).save();
-            console.log(recipe.image_url);
             return recipe;
         },
 
@@ -57,6 +58,7 @@ const resolvers = {
                 minutes,
                 nutritions,
                 main_ingredients,
+                ingredients,
                 instruction,
                 image_url
             } = recipe;
@@ -68,6 +70,7 @@ const resolvers = {
                 minutes: minutes,
                 nutritions: nutritions,
                 main_ingredients: main_ingredients,
+                ingredients: ingredients,
                 instruction: instruction,
                 image_url: image_url
             };
