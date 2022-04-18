@@ -8,6 +8,48 @@ const resolvers = {
         getRecipe: async(_, { id }) => {
             return await Recipe.findById(id);
         },
+        searchRecipe: async(_, { filter }) => {
+            const dbfilter = {};
+
+            if (filter.keyword !== undefined) {
+                dbfilter.name = { $regex: filter.keyword, $options: "i" };
+            }
+
+            // todo: change the min and max
+            if (filter.price !== undefined) {
+                let min, max;
+                switch (filter.price) {
+                    case 1:
+                        min = 5;
+                        max = 10;
+                        break;
+                    case 2:
+                        min = 11;
+                        max = 20;
+                        break;
+                    case 3:
+                        min = 21;
+                        max = 30;
+                        break;
+                    default:
+                        min = 31;
+                        max = 100;
+                }
+                dbfilter.price_per_serving = { $gt: min, $lt: max };
+            }
+
+            if (filter.main_ingredients !== undefined) {
+                dbfilter.main_ingredients = { $all: filter.main_ingredients };
+            }
+
+            // todo: add the rest of nutrition fields
+            // change the range
+            if (filter.low_cal) {
+                dbfilter.nutritions = { $elemMatch: { key: "calories", value: { $gt: 10, $lt: 150 } } };
+            }
+
+            return await Recipe.find(dbfilter);
+        },
     },
 
     Mutation: {
@@ -33,7 +75,7 @@ const resolvers = {
                 main_ingredients: main_ingredients,
                 ingredients: ingredients,
                 instruction: instruction,
-                image_url: image_url
+                image_url: image_url,
             };
             const recipe = await new Recipe(newRecipe).save();
             return recipe;
@@ -60,7 +102,7 @@ const resolvers = {
                 main_ingredients,
                 ingredients,
                 instruction,
-                image_url
+                image_url,
             } = recipe;
 
             const newRecipe = {
@@ -72,7 +114,7 @@ const resolvers = {
                 main_ingredients: main_ingredients,
                 ingredients: ingredients,
                 instruction: instruction,
-                image_url: image_url
+                image_url: image_url,
             };
 
             const updatedRecipe = await Recipe.findByIdAndUpdate(id, newRecipe, {
