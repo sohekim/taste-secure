@@ -30,9 +30,10 @@ const typeDefs = gql `
     getAllRecipes: [Recipe]
     getRecipe(id: ID): Recipe
     searchRecipe(filter: RecipeFilter): [Recipe]
+    getHomeRecipe: [Recipe] 
+    getRecipesOfTheDay: [Recipe]
   }
 
-  # if only used for nurition, change its name
   input PairInput {
     name: String
     val: Int
