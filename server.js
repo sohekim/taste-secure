@@ -27,7 +27,7 @@ async function startApolloServer(typeDefs, resolvers) {
         baseUrl = "http://cs-vm-04.cs.mtholyoke.edu";
     } else {
         PORT = 4040;
-        baseUrl = "http://localhost:";
+        baseUrl = "http://localhost";
     }
 
     await new Promise((resolve) => app.listen({ port: PORT }, resolve));
