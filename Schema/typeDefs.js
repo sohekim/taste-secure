@@ -2,8 +2,8 @@ const { gql } = require("apollo-server-express");
 
 const typeDefs = gql `
   type Pair {
-    key: String
-    value: String
+    name: String
+    val: Int
   }
 
   type Recipe {
@@ -19,14 +19,23 @@ const typeDefs = gql `
     image_url: String
   }
 
+  input RecipeFilter {
+    keyword: String
+    price: Int
+    low_cal: Boolean
+    main_ingredients: [String]
+  }
+
   type Query {
     getAllRecipes: [Recipe]
     getRecipe(id: ID): Recipe
+    searchRecipe(filter: RecipeFilter): [Recipe]
   }
 
+  # if only used for nurition, change its name
   input PairInput {
-      key: String
-      value: String
+    name: String
+    val: Int
   }
 
   input RecipeInput {

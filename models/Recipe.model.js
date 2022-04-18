@@ -17,7 +17,7 @@ const recipeSchema = new mongoose.Schema({
         required: true,
     },
     nutritions: {
-        type: [{ key: String, value: String }],
+        type: [{ name: String, val: Number }],
         required: true,
     },
     main_ingredients: {
