@@ -45,10 +45,18 @@ const resolvers = {
             // todo: add the rest of nutrition fields
             // change the range
             if (filter.low_cal) {
-                dbfilter.nutritions = { $elemMatch: { key: "calories", value: { $gt: 10, $lt: 150 } } };
+                dbfilter.nutritions = {
+                    $elemMatch: { key: "calories", value: { $gt: 10, $lt: 150 } },
+                };
             }
 
             return await Recipe.find(dbfilter);
+        },
+        getHomeRecipe: async() => {
+            return await Recipe.aggregate([{ $sample: { size: 1 } }])
+        },
+        getRecipesOfTheDay: async() => {
+            return await Recipe.aggregate([{ $sample: { size: 5 } }])
         },
     },
 
