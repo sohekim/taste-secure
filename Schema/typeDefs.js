@@ -30,7 +30,7 @@ const typeDefs = gql `
     getAllRecipes: [Recipe]
     getRecipe(id: ID): Recipe
     searchRecipe(filter: RecipeFilter): [Recipe]
-    getHomeRecipe: [Recipe] 
+    getHomeRecipe: Recipe 
     getRecipesOfTheDay: [Recipe]
   }
 

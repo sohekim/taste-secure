@@ -53,7 +53,8 @@ const resolvers = {
             return await Recipe.find(dbfilter);
         },
         getHomeRecipe: async() => {
-            return await Recipe.aggregate([{ $sample: { size: 1 } }])
+            const result = await Recipe.aggregate([{ $sample: { size: 1 } }]);
+            return result[0];
         },
         getRecipesOfTheDay: async() => {
             return await Recipe.aggregate([{ $sample: { size: 5 } }])
