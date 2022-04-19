@@ -52,8 +52,12 @@ const resolvers = {
 
             return await Recipe.find(dbfilter);
         },
-        getHomeRecipe: async() => {},
-        getRecipesOfTheDay: async() => {},
+        getHomeRecipe: async() => {
+            return await Recipe.aggregate([{ $sample: { size: 1 } }])
+        },
+        getRecipesOfTheDay: async() => {
+            return await Recipe.aggregate([{ $sample: { size: 5 } }])
+        },
     },
 
     Mutation: {
