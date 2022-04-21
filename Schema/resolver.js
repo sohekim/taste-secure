@@ -15,25 +15,24 @@ const resolvers = {
                 dbfilter.name = { $regex: filter.keyword, $options: "i" };
             }
 
-            // todo: change the min and max
             if (filter.price !== undefined) {
                 let min, max;
                 switch (filter.price) {
                     case 1:
-                        min = 5;
-                        max = 10;
+                        min = 0;
+                        max = 3;
                         break;
                     case 2:
-                        min = 11;
-                        max = 20;
+                        min = 3;
+                        max = 5;
                         break;
                     case 3:
-                        min = 21;
-                        max = 30;
+                        min = 5;
+                        max = 7;
                         break;
                     default:
-                        min = 31;
-                        max = 100;
+                        min = 8;
+                        max = 20;
                 }
                 dbfilter.price_per_serving = { $gt: min, $lt: max };
             }
