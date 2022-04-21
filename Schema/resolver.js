@@ -82,10 +82,17 @@ const resolvers = {
         },
         getHomeRecipe: async() => {
             const result = await Recipe.aggregate([{ $sample: { size: 1 } }]);
+            result.forEach(element => {
+                element.id = element._id
+            });
             return result[0];
         },
         getRecipesOfTheDay: async() => {
-            return await Recipe.aggregate([{ $sample: { size: 5 } }])
+            const result = await Recipe.aggregate([{ $sample: { size: 3 } }]);
+            result.forEach(element => {
+                element.id = element._id
+            });
+            return result;
         },
     },
 
