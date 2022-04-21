@@ -8,7 +8,7 @@ const { devURL, prodURL } = require('./key');
 async function startApolloServer(typeDefs, resolvers) {
     let PORT, baseURL, dbURL;
 
-    if (process.env.Node_ENV === "prod") {
+    if (process.env.NODE_ENV === "prod") {
         PORT = process.env.PORT || 31600;
         baseURL = "http://cs-vm-04.cs.mtholyoke.edu";
         dbURL = prodURL;
