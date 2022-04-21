@@ -22,8 +22,13 @@ const typeDefs = gql `
   input RecipeFilter {
     keyword: String
     price: Int
-    low_cal: Boolean
     main_ingredients: [String]
+    low_cal: Boolean
+    high_protein: Boolean
+    low_carbs: Boolean
+    low_fats: Boolean
+    high_fibre: Boolean
+    low_chol: Boolean
   }
 
   type Query {
