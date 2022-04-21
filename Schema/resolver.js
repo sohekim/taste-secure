@@ -11,11 +11,11 @@ const resolvers = {
         searchRecipe: async(_, { filter }) => {
             const dbfilter = {};
 
-            if (filter.keyword !== undefined) {
+            if (filter.keyword !== "") {
                 dbfilter.name = { $regex: filter.keyword, $options: "i" };
             }
 
-            if (filter.price !== undefined) {
+            if (filter.price !== -1) {
                 let min, max;
                 switch (filter.price) {
                     case 1:
@@ -37,46 +37,45 @@ const resolvers = {
                 dbfilter.price_per_serving = { $gt: min, $lt: max };
             }
 
-            if (filter.main_ingredients !== undefined) {
+            if (filter.main_ingredients.length !== 0) {
                 dbfilter.main_ingredients = { $all: filter.main_ingredients };
             }
 
             if (filter.low_cal) {
                 dbfilter.nutritions = {
-                    $elemMatch: { key: "calories", value: { $gt: 0, $lt: 401 } },
+                    $elemMatch: { name: "calories", val: { $gt: 0, $lt: 401 } },
                 };
             }
 
             if (filter.high_protein) {
                 dbfilter.nutritions = {
-                    $elemMatch: { key: "protein", value: { $gt: 25 } },
+                    $elemMatch: { name: "protein", val: { $gt: 25 } },
                 };
             }
 
             if (filter.low_carbs) {
                 dbfilter.nutritions = {
-                    $elemMatch: { key: "carbs", value: { $lt: 31 } },
+                    $elemMatch: { name: "carbs", val: { $lt: 31 } },
                 };
             }
 
             if (filter.low_fats) {
                 dbfilter.nutritions = {
-                    $elemMatch: { key: "fats", value: { $lt: 7 } },
+                    $elemMatch: { name: "fats", val: { $lt: 7 } },
                 };
             }
 
             if (filter.high_fibre) {
                 dbfilter.nutritions = {
-                    $elemMatch: { key: "fibre", value: { $gt: 6 } },
+                    $elemMatch: { name: "fibre", val: { $gt: 6 } },
                 };
             }
 
             if (filter.low_chol) {
                 dbfilter.nutritions = {
-                    $elemMatch: { key: "cholestrol", value: { $lt: 21 } },
+                    $elemMatch: { name: "cholestrol", val: { $lt: 21 } },
                 };
             }
-
 
             return await Recipe.find(dbfilter);
         },
