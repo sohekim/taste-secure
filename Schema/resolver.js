@@ -41,13 +41,42 @@ const resolvers = {
                 dbfilter.main_ingredients = { $all: filter.main_ingredients };
             }
 
-            // todo: add the rest of nutrition fields
-            // change the range
             if (filter.low_cal) {
                 dbfilter.nutritions = {
-                    $elemMatch: { key: "calories", value: { $gt: 10, $lt: 150 } },
+                    $elemMatch: { key: "calories", value: { $gt: 0, $lt: 401 } },
                 };
             }
+
+            if (filter.high_protein) {
+                dbfilter.nutritions = {
+                    $elemMatch: { key: "protein", value: { $gt: 25 } },
+                };
+            }
+
+            if (filter.low_carbs) {
+                dbfilter.nutritions = {
+                    $elemMatch: { key: "carbs", value: { $lt: 31 } },
+                };
+            }
+
+            if (filter.low_fats) {
+                dbfilter.nutritions = {
+                    $elemMatch: { key: "fats", value: { $lt: 7 } },
+                };
+            }
+
+            if (filter.high_fibre) {
+                dbfilter.nutritions = {
+                    $elemMatch: { key: "fibre", value: { $gt: 6 } },
+                };
+            }
+
+            if (filter.low_chol) {
+                dbfilter.nutritions = {
+                    $elemMatch: { key: "cholestrol", value: { $lt: 21 } },
+                };
+            }
+
 
             return await Recipe.find(dbfilter);
         },
