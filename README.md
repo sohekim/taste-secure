@@ -1,6 +1,6 @@
 </br>
 <H1 > Taste Secure </H1>
-<p >The goal of this project aims to offer recipes with good nutritional value to low income individuals. </p>
+<p >The goal of this project is to offer recipes with good nutritional value to low income individuals. </p>
 
 
 ## Table of Contents
